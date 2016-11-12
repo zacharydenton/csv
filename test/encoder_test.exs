@@ -34,7 +34,7 @@ defmodule EncoderTest do
   end
 
   test "specified headers inserted as first row and used to order columns" do
-    result = Encoder.encode([%{"b" => 2}], headers: ["a", "b"]) |> Enum.to_list()
-    assert result == ["a,b\r\n", ",2\r\n"]
+    result = Encoder.encode([%{"b" => 2}], headers: ["b", "a"]) |> Enum.to_list()
+    assert result == ["b,a\r\n", "2,\r\n"]
   end
 end
