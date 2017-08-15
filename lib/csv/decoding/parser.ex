@@ -1,6 +1,4 @@
 defmodule CSV.Decoding.Parser do
-  alias CSV.EscapeSequenceError
-
   @moduledoc ~S"""
   The CSV Parser module - parses tokens coming from the lexer and parses them
   into a row of fields.
@@ -34,9 +32,6 @@ defmodule CSV.Decoding.Parser do
       {_, content} ->
         parse(row, field <> content, tokens, true, false, options)
     end
-  end
-  defp parse(_, field, [], true, _, _) do
-    { :error, EscapeSequenceError, field }
   end
   defp parse(row, "", [token | tokens], false, after_unquote, options) do
     case token do
