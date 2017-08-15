@@ -30,7 +30,10 @@ defmodule CSV.Decoding.Parser do
   end
 
   defp parse(row, field, [token | tokens], true, _, options) do
-    parse(row, field <> content, tokens, true, false, options)
+    case token do
+      {_, content} ->
+        parse(row, field <> content, tokens, true, false, options)
+    end
   end
   defp parse(_, field, [], true, _, _) do
     { :error, EscapeSequenceError, field }
