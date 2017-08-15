@@ -43,9 +43,6 @@ defmodule CSV.Decoding.Lexer do
   defp lex(tokens, current_token, << @carriage_return :: utf8 >> <> tail, separator) do
     lex(tokens |> add_token(current_token), { :delimiter, << @carriage_return :: utf8 >> }, tail, separator)
   end
-  defp lex(tokens, current_token, << @double_quote :: utf8 >> <> tail, separator) do
-    lex(tokens |> add_token(current_token), { :double_quote, << @double_quote :: utf8 >> }, tail, separator)
-  end
   defp lex(tokens, current_token, << head :: utf8 >> <> tail, separator) when head == separator do
     lex(tokens |> add_token(current_token), { :separator, << separator :: utf8 >> }, tail, separator)
   end
